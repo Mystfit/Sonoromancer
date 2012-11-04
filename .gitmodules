@@ -1,3 +1,6 @@
 [submodule "ofxOpenNI"]
 	path = ofxOpenNI
-	url = http://github.com/gameoverhack/ofxOpenNI.git
+	url = http://github.com/Mystfit/ofxOpenNI.git
+[submodule "ofxMidi"]
+	path = ofxMidi
+	url = https://github.com/chrisoshea/ofxMidi.git

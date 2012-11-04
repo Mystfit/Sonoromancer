@@ -114,7 +114,7 @@ void ofxCvBlobFinder::matchExistingBlobs(){
             
             curvature = CLAMP(1.0f - ((MAX_CURVATURE - (curvature / cd.size() + 1)) / MAX_CURVATURE), 0.0f, 1.0f);
             
-            if(area != blobParams[paramIndex].area || blobParams[paramIndex].position != position || blobParams[paramIndex].position != curvature){
+            if(area != blobParams[paramIndex].area || blobParams[paramIndex].position != position || blobParams[paramIndex].curvature != curvature){
                 blobParams[paramIndex].isDirty = true;
                 blobParams[paramIndex].position = position;
                 blobParams[paramIndex].area = area;
