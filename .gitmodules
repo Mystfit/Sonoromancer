@@ -1,0 +1,3 @@
+[submodule "ofxOpenNI"]
+	path = ofxOpenNI
+	url = http://github.com/gameoverhack/ofxOpenNI.git
