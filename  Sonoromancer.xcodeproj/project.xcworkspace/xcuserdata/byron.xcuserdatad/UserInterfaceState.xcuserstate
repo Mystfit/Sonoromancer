@@ -798,9 +798,9 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>373718641.47852099</real>
-		<string>{12, 932}</string>
-		<string>{347, 0}</string>
+		<real>373720811.90612799</real>
+		<string>{0, 874}</string>
+		<string>{285, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -1396,7 +1396,7 @@
 				<integer>136</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>373718523.59955198</real>
+			<real>373720782.88975698</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -1407,7 +1407,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 11:42 PM</string>
+		<string>Today at 12:19 AM</string>
 		<integer>106</integer>
 		<string>openFrameworks</string>
 		<dict>
@@ -1632,7 +1632,7 @@
 		<string>IDEWindowToolbarIsVisible</string>
 		<string>IDEWorkspaceWindowControllerUniqueIdentifier</string>
 		<string>IDEActiveWorkspaceTabController</string>
-		<string>{{25, 165}, {1432, 985}}</string>
+		<string>{{737, 194}, {1432, 985}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -2205,9 +2205,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>373718641.47987401</real>
-		<string>{12, 932}</string>
-		<string>{347, 0}</string>
+		<real>373720811.90768403</real>
+		<string>{0, 874}</string>
+		<string>{285, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
