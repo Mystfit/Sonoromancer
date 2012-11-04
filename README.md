@@ -5,7 +5,7 @@
 1. Grab Openframeworks build 0071 (haven't tried building on 0072, will get around to it soon).
 
 
-2. Clone the repository with 'git clone http://github.com/Mystfit/Sonoromancer.git'. Grab the ofxOpenNI and ofxMidi submodules by running 'git submodule init' and 'git submodule update'.
+2. Clone the repository into openframeworks/apps/myApps(or devApps) with 'git clone http://github.com/Mystfit/Sonoromancer.git'. Grab the ofxOpenNI and ofxMidi submodules by running 'git submodule init' and 'git submodule update'.
 
 
 3. You'll need to make a small change in ofImage.cpp under libs/openframeworks/grpahics. On line 874 replace "type = GL_SOMETHINGSOMETHINGCANTREMEMBER;" with "type = GL_LUMINANCE32F_ARB;"
