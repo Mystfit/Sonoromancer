@@ -39,8 +39,8 @@ class ofxCvBlobFinder : private ofBaseDraws {
     float getApproxFactor(){ return approxFactor; }; 
     
     void matchExistingBlobs();
-    int getParamIndexFromBlob(ofxCvComplexBlob blob);
-    int getParamIndexFromBlob(ofxCvComplexBlob blob, bool force);
+    int getParamIndexFromBlob(ofxCvComplexBlob& blob);
+    int getParamIndexFromBlob(ofxCvComplexBlob& blob, bool force);
 
     virtual void  draw() {
       draw(0, 0, _width, _height);
