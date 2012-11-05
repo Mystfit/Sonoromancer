@@ -13,8 +13,13 @@ FluidPlayer::FluidPlayer()
 {
     //MIDI params
     midiOut.listPorts(); // via instance
+    midiIn.listPorts(); // via instance
+
     midiOut.openPort("passthrough_in");	// by name
     midiIn.openPort("passthrough_out");	// by name
+    //midiOut.openPort("Network Sonoromancer_host");
+    //midiIn.openPort("Network Sonoromancer_host");
+
     midiIn.ignoreTypes(false, false, false);
     midiIn.addListener(this);
     

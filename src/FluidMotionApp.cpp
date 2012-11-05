@@ -306,18 +306,20 @@ void FluidMotionApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void FluidMotionApp::mousePressed(int x, int y, int button){
     bMouseHeld = true;
-    if(bPaint){
-        fluid.bIsAddingDye = false;
-        dyeRadius = 25.0f;
-        dyeDensity = 0.1f;
-        dyeVelocityMult = 0.3f;
-
-    }else{
-        fluid.bIsAddingDye = true;
-        dyeRadius = 10.0f;
-        dyeDensity = 0.5f;
-        dyeVelocityMult = 0.8f;
-    }
+    
+    ofLog(OF_LOG_NOTICE, "Mousepressed:" + ofToString(button));
+//    if(bPaint){
+//        fluid.bIsAddingDye = false;
+//        dyeRadius = 25.0f;
+//        dyeDensity = 0.1f;
+//        dyeVelocityMult = 0.3f;
+//
+//    }else{
+//        fluid.bIsAddingDye = true;
+//        dyeRadius = 10.0f;
+//        dyeDensity = 0.5f;
+//        dyeVelocityMult = 0.8f;
+//    }
 }
 
 //--------------------------------------------------------------
