@@ -51,7 +51,7 @@ void ofxCvBlobFinder::findBlobs(ofxCvGrayscaleImage image, bool find_holes) {
 
 void ofxCvBlobFinder::matchExistingBlobs(){
     int i;
-    int paramIndex;
+    int paramIndex = -1;
     
     if(blobz.size() < 1) blobParams.clear();
     
@@ -61,7 +61,9 @@ void ofxCvBlobFinder::matchExistingBlobs(){
     {
         for(i = 0; i < blobz.size(); i++)
         {
-            paramIndex = getParamIndexFromBlob(blobz[i]);
+            ofxCvComplexBlob& tempBlob = blobz[i];
+            
+            paramIndex = getParamIndexFromBlob(tempBlob);
            
             if(paramIndex < 0 ){
                 BlobParam blobParam;
@@ -82,7 +84,9 @@ void ofxCvBlobFinder::matchExistingBlobs(){
             int blobIndex = 0;
             while( blobIndex < blobz.size() )
             {
-                paramIndex = getParamIndexFromBlob(blobz[blobIndex]);
+                ofxCvComplexBlob& tempBlob = blobz[blobIndex];
+ 
+                paramIndex = getParamIndexFromBlob(tempBlob);
                 
                 if(paramIndex < 0){
                     blobParams.erase(blobParams.begin() + i);
@@ -126,14 +130,18 @@ void ofxCvBlobFinder::matchExistingBlobs(){
 
 
 
-int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob blob, bool force)
+int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob& blob, bool force)
 {
     int noteIndex = -1;
     float smallestDist = 0.0f;
     float distThreshold = 10.0f;
     
-    if(blobz.size() == 1)
-        return 0;
+    if(blobz.size() == 1){
+        noteIndex = 0;
+        ofLog(OF_LOG_NOTICE, "Final note index:" + ofToString(noteIndex));
+
+        return noteIndex;
+    }
     
     for(int i = 0; i < blobParams.size(); i++)
     {
@@ -159,9 +167,9 @@ int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob blob, bool force)
 /*
  * Match active notes against current list of blobs
  */
-int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob blob)
+int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob& blob)
 {
-    getParamIndexFromBlob(blob, false); 
+    return getParamIndexFromBlob(blob, false);
 }
 
 
