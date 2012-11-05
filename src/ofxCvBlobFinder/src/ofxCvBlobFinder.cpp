@@ -161,7 +161,7 @@ int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob blob, bool force)
  */
 int ofxCvBlobFinder::getParamIndexFromBlob(ofxCvComplexBlob blob)
 {
-    getParamIndexFromBlob(blob, false);
+    getParamIndexFromBlob(blob, false); 
 }
 
 

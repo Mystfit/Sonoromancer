@@ -303,9 +303,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "99"
-         endingLineNumber = "99"
-         landmarkName = "FluidPlayer::getInstrumentByName(string name)"
-         landmarkType = "5">
+         endingLineNumber = "99">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -418,9 +416,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "FluidPlayer::nextInstrument()"
-         landmarkType = "5">
+         endingLineNumber = "70">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -627,7 +623,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "334"
          endingLineNumber = "334"
-         landmarkName = "FluidPlayer::blobsToNotes(vector&lt;BlobParam&gt; blobParameters)"
+         landmarkName = "FluidPlayer::musicTick()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -653,7 +649,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "41"
          endingLineNumber = "41"
-         landmarkName = "FluidInstrument::createNotesFromBlobParameters(BlobParam blobParameter)"
+         landmarkName = "FluidInstrument::tickNoteParams()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -666,7 +662,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "28"
          endingLineNumber = "28"
-         landmarkName = "FluidInstrument::createNotesFromBlobParameters(BlobParam blobParameter)"
+         landmarkName = "FluidInstrument::addNoteParam(InstrumentParameter param, bool dampable = true)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -727,7 +723,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "35"
          endingLineNumber = "35"
-         landmarkName = "FluidInstrument::createNotesFromBlobParameters(BlobParam blobParameter)"
+         landmarkName = "FluidInstrument::addNoteParam(InstrumentParameter param, bool dampable = true)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -740,7 +736,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "32"
          endingLineNumber = "32"
-         landmarkName = "FluidInstrument::createNotesFromBlobParameters(BlobParam blobParameter)"
+         landmarkName = "FluidInstrument::addNoteParam(InstrumentParameter param, bool dampable = true)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -766,7 +762,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "79"
          endingLineNumber = "79"
-         landmarkName = "FluidInstrument::createNotesFromBlobParameters(BlobParam blobParameter)"
+         landmarkName = "FluidInstrument::getParametersByTagType(int paramType)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -778,9 +774,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "103"
-         endingLineNumber = "103"
-         landmarkName = "FluidInstrument::blobParamValueFromSource(BlobParam blobParam, int source)"
-         landmarkType = "5">
+         endingLineNumber = "103">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -843,9 +837,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "377"
-         endingLineNumber = "377"
-         landmarkName = "FluidPlayer::getBlobIndexFromNoteId(int blobId)"
-         landmarkType = "5">
+         endingLineNumber = "377">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1052,7 +1044,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "94"
          endingLineNumber = "94"
-         landmarkName = "FluidInstrument::getParametersByTagType(int paramType)"
+         landmarkName = "FluidInstrument::blobParamValueFromSource(BlobParam blobParam, int source)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
