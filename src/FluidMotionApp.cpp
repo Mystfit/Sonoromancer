@@ -97,27 +97,10 @@ void FluidMotionApp::decreaseThreshold()
 }
 
 
-
+//  Update
 //--------------------------------------------------------------
 void FluidMotionApp::update(){
     
-    // Adding temporal Force
-    //
-    if(bMouseHeld){
-        ofPoint m = ofPoint(mouseX,mouseY);
-        ofPoint d = (m - oldM)*2.0f;
-        oldM = m;
-        ofPoint c = ofPoint(512*0.5, 512*0.5) - m;
-        c.normalize();
-            
-        fluid.addTemporalForce(m, d*dyeVelocityMult, dyeColour, dyeRadius,100.0f,0.5f);
-    }
-    
-    
-    //  Update
-    //--------
-    
-      
     if(!isPlayingBackFrames)
     {
         
@@ -307,19 +290,10 @@ void FluidMotionApp::mouseDragged(int x, int y, int button){
 void FluidMotionApp::mousePressed(int x, int y, int button){
     bMouseHeld = true;
     
-    ofLog(OF_LOG_NOTICE, "Mousepressed:" + ofToString(button));
-//    if(bPaint){
-//        fluid.bIsAddingDye = false;
-//        dyeRadius = 25.0f;
-//        dyeDensity = 0.1f;
-//        dyeVelocityMult = 0.3f;
-//
-//    }else{
-//        fluid.bIsAddingDye = true;
-//        dyeRadius = 10.0f;
-//        dyeDensity = 0.5f;
-//        dyeVelocityMult = 0.8f;
-//    }
+    if(button == 0)
+        fluidPlayer.nextInstrument();
+    else if(button == 2)
+        fluidPlayer.prevInstrument();
 }
 
 //--------------------------------------------------------------
