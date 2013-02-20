@@ -9,6 +9,7 @@
 #include "ofxCvBlobFinder.h"
 #include "ofxMidi.h"
 #include "ofxOpenNI.h"
+#include "ofxUI.h"
 
 #include "FluidSim.h"
 #include "FluidPlayer.h"
@@ -63,6 +64,11 @@ public:
     
     //Music control
     FluidPlayer fluidPlayer;
+    
+    //UI
+    ofxUICanvas *gui;
+    void exit();
+    void guiEvent(ofxUIEventArgs &e);
     
     //Kinect control
     FluidKinect fluidKinect;

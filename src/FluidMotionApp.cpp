@@ -4,7 +4,7 @@
 //--------------------------------------------------------------
 void FluidMotionApp::setup(){
     
-    //ofEnableAlphaBlending();
+    ofEnableAlphaBlending();
 	ofSetWindowShape(512, 512);
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
@@ -32,6 +32,9 @@ void FluidMotionApp::setup(){
     dyeDensity = 0.1f;
     dyeVelocityMult = 1.0f;
     
+    //Init gui
+    gui = new ofxUICanvas(0,0,512,512);
+    
     //Kinect properties
     depthActivationEnd = 0.1f;
     depthActivationStart = 0.06f;
@@ -49,9 +52,6 @@ void FluidMotionApp::setup(){
     bDrawFluid = true;
     bDrawBlobs = false;
     bCalculateBlobs = true;
-    
-    
-    
     //fluid.addConstantForce(ofPoint(256*0.5f,256*0.5f), ofPoint(0,0), ofFloatColor(1.0f,1.0f,1.0f), 20.0f);
     
 }
@@ -94,6 +94,22 @@ void FluidMotionApp::decreaseThreshold()
 
 }
 
+
+
+
+
+//  Gui
+//--------------------------------------------------------------
+void FluidMotionApp::exit()
+{
+	gui->saveSettings("GUI/guiSettings.xml");
+    delete gui;
+}
+
+void FluidMotionApp::guiEvent(ofxUIEventArgs &e)
+{
+	
+}
 
 //  Update
 //--------------------------------------------------------------
