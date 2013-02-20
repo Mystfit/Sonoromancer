@@ -8,7 +8,8 @@
 2. Clone the repository into openframeworks/apps/myApps(or devApps) with: <pre>git clone http://github.com/Mystfit/Sonoromancer.git</pre> Grab the ofxOpenNI and ofxMidi submodules by running <pre>git submodule init</pre> and <pre>git submodule update</pre>
 
 
-3. You'll need to make a small change in ofImage.cpp under libs/openframeworks/grpahics. On line 874 replace <pre>type = GL_LUMINANCE;</pre> with <pre>type = GL_LUMINANCE32F_ARB;</pre>
+3. #####UPDATE: This is fixed in of_v0073_osx_release! 
+You'll need to make a small change in ofImage.cpp under libs/openframeworks/graphics. On line 874 replace <pre>type = GL_LUMINANCE;</pre> with <pre>type = GL_LUMINANCE32F_ARB;</pre>
 
 
 4. At the moment, the program will directly connect to the midi devices "passthrough_in" and "passthrough_out" until I fix this in the instrument XML definitions. I recommend using MIDI Patchbay (http://notahat.com/midi_patchbay) to create virtual midi in/out ports with these names and use them to route connections to your MIDI device of choice. I'm sending mine to Ableton Live for example.
