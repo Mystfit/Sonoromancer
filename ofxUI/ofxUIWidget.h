@@ -78,7 +78,7 @@ public:
     {
         ofPushStyle(); 
         
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA); 
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         
         drawPadded();
         drawPaddedOutline();        

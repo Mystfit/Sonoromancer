@@ -66,6 +66,7 @@ public:
     FluidPlayer fluidPlayer;
     
     //UI
+    void initGui();
     ofxUICanvas *gui;
     void exit();
     void guiEvent(ofxUIEventArgs &e);

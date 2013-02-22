@@ -65,9 +65,10 @@ public:
     void draw();
     void keyPressed(int key);
     
+    bool isDeviceConnected;
+    
     ofxOpticalFlowLK opFlow;
     void updateOpticalFlow(ofTexture & maskedKinect);
-    
     
     ofxCvColorImage blurImage;
     

@@ -20,38 +20,43 @@ FluidKinect::FluidKinect()
 	nearThreshold = 500;
 	farThreshold  = 1000;
     
-    
 	filterFactor = 0.1f;
     
     opticalBlur = 17;
     
     init();
-
 }
 
 void FluidKinect::init()
 {
-   
+
+    
     
 #if defined (TARGET_OSX) //|| defined(TARGET_LINUX) // only working on Mac/Linux at the moment (but on Linux you need to run as sudo...)
 	hardware.setup();				// libusb direct control of motor, LED and accelerometers
-    hardware.setLedOption(LED_GREEN); // turn off the led just for yacks (or for live installation/performances ;-)
-
 #endif
     
-	recordContext.setup();	// all nodes created by code -> NOT using the xml config file at all
-	//recordContext.setupUsingXMLFile();
-	recordDepth.setup(&recordContext);
-    recordImage.setup(&recordContext);
-    
-    recordDepth.setDepthColoring(COLORING_GREY);
+    if(hardware.getDeviceConnectionStatus()){
+        hardware.setLedOption(LED_GREEN); // turn off the led just for yacks (or for live installation/performances ;-)
 
-    recordUser.setup(&recordContext);
-	recordUser.setSmoothing(filterFactor);				// built in openni skeleton smoothing...
-	recordUser.setUseMaskPixels(isMasking);
-	recordUser.setMaxNumberOfUsers(2);					// use this to set dynamic max number of users (NB: that a hard upper limit is defined by MAX_NUMBER_USERS in ofxUserGenerator)
-    recordContext.toggleRegisterViewport();
-	recordContext.toggleMirror();
+        recordContext.setup();	// all nodes created by code -> NOT using the xml config file at all
+        //recordContext.setupUsingXMLFile();
+        recordDepth.setup(&recordContext);
+        recordImage.setup(&recordContext);
+        
+        recordDepth.setDepthColoring(COLORING_GREY);
+
+        recordUser.setup(&recordContext);
+        recordUser.setSmoothing(filterFactor);				// built in openni skeleton smoothing...
+        recordUser.setUseMaskPixels(isMasking);
+        recordUser.setMaxNumberOfUsers(2);					// use this to set dynamic max number of users (NB: that a hard upper limit is defined by MAX_NUMBER_USERS in ofxUserGenerator)
+        recordContext.toggleRegisterViewport();
+        recordContext.toggleMirror();
+        
+        isDeviceConnected = true;
+    } else {
+        ofLog(OF_LOG_ERROR, "---> No Kinect detected!");    //Replace with GUI warning
+    }
     
     cameraImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     cameraDepthImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -75,7 +80,7 @@ void FluidKinect::init()
 void FluidKinect::update()
 {
     hardware.update();
-    if (isLive) {
+    if (isLive && isDeviceConnected) {
         
         // update all nodes
 		recordContext.update();

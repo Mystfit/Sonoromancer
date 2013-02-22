@@ -520,7 +520,8 @@ public:
         if(!isEnabled())
         {            
             enabled = true;
-            visible = true; 
+            visible = true;
+            ofLog(OF_LOG_NOTICE, "--> Gui Enabled");
             enableAppDrawCallback();
             enableAppUpdateCallback();
             enableAppExitCallback();
@@ -688,18 +689,18 @@ public:
         ofPushStyle(); 
 		glDisable(GL_DEPTH_TEST);       
         glDisable(GL_LIGHTING);
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA); 
-        ofSetRectMode(OF_RECTMODE_CORNER);         
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+        ofSetRectMode(OF_RECTMODE_CORNER);
         ofSetLineWidth(1.0);
-        
+
         drawPadded();
-        
+
         drawPaddedOutline(); 
         
         drawBack(); 
         
         drawFill(); 
-        
+
         drawFillHighlight(); 
         
         drawOutline(); 
@@ -710,11 +711,11 @@ public:
 		{
             if(widgets[i]->isVisible())
             {
-                widgets[i]->draw(); 	
+                widgets[i]->draw();
             }
 		}
 		
-		glDisable(GL_DEPTH_TEST); 
+		glDisable(GL_DEPTH_TEST);
         ofPopStyle();
     }
     

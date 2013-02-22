@@ -326,8 +326,8 @@ FluidSim::FluidSim(){
     smokeBuoyancy       = 1.0f;
     smokeWeight         = 0.05f;
     
-    bDrawVelocity = false;
-    bDrawPressure = true;
+    bDrawVelocity = true;
+    bDrawPressure = false;
     bDrawTemperature = false;
     
     //gForce.set(0,-0.98);
@@ -387,11 +387,11 @@ void FluidSim::addConstantForce(ofPoint _pos, ofPoint _vel, ofFloatColor _col, f
 void FluidSim::update(){
     //Obstacles need it´s the half othe the side
     ofPushStyle();
+    
     obstaclesFbo.begin();
     ofSetColor(255, 255);
     textures[0].draw(0,0,gridWidth,gridHeight);
     obstaclesFbo.end();
-    ofPopStyle();
     
     advect(velocityBuffer);
     velocityBuffer.swap();
@@ -408,12 +408,6 @@ void FluidSim::update(){
     
     //Apply external velocity from kinect
     //-----------------------------------
-    //  applyExternalVelocity(temperatureBuffer, externalVelocityBuffer.src->getTextureReference());
-    //  temperatureBuffer.swap();
-    //
-    //    applyExternalVelocity(pingPong, externalVelocityBuffer.src->getTextureReference());
-    //    pingPong.swap();
-    //
     applyExternalVelocity(velocityBuffer, externalVelocityBuffer.src->getTextureReference());
     velocityBuffer.swap();
     
@@ -456,19 +450,44 @@ void FluidSim::update(){
         pressureBuffer.swap();
     }
     
+
+    
     subtractGradient();
     velocityBuffer.swap();
     
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
-    ofDisableBlendMode();
+    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    //ofDisableBlendMode();
+    //glDisable(GL_BLEND);
+ 
+    ofPopStyle();
+
 }
+
+void FluidSim::drawVelocity(){
+    bDrawVelocity = true;
+    bDrawPressure = false;
+    bDrawTemperature = false;
+}
+
+void FluidSim::drawPressure(){
+    bDrawVelocity = false;
+    bDrawPressure = true;
+    bDrawVelocity = false;
+}
+
+void FluidSim::drawTemperature(){
+    bDrawVelocity = false;
+    bDrawPressure = false;
+    bDrawTemperature = true;
+}
+
 
 void FluidSim::draw(int x, int y, float _width, float _height){
     if (_width == -1) _width = width;
     if (_height == -1) _height = height;
     
     ofPushStyle();
-    glEnable(GL_BLEND);
+    //glEnable(GL_BLEND);
     ofSetColor(255);
     
     if(bDrawVelocity)
@@ -477,8 +496,6 @@ void FluidSim::draw(int x, int y, float _width, float _height){
         pingPong.src->draw(x,y,_width,_height);
     if(bDrawTemperature)
         temperatureBuffer.src->draw(x,y,_width,_height);
-    
-    
     
     //textures[0].draw(x,y,_width,_height);
     glDisable(GL_BLEND);
