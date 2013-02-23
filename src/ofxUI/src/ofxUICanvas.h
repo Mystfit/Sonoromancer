@@ -689,7 +689,7 @@ public:
         ofPushStyle(); 
 		glDisable(GL_DEPTH_TEST);       
         glDisable(GL_LIGHTING);
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA); 
+        ofEnableBlendMode(OF_BLENDMODE_ADD); 
         ofSetRectMode(OF_RECTMODE_CORNER);         
         ofSetLineWidth(1.0);         
         
@@ -714,7 +714,9 @@ public:
                 widgets[i]->draw(); 	
             }
 		}
-		
+        
+        ofDisableBlendMode();
+
 		glDisable(GL_DEPTH_TEST); 
         ofPopStyle();         
     }

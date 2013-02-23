@@ -1,20 +1,25 @@
 <Widget>
     <Kind>2</Kind>
     <Name>FULLSCREEN</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>Velocity</Name>
     <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>Pressure</Name>
+    <Name>Velocity</Name>
     <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
+    <Name>Pressure</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
     <Name>Temperature</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>Kinect Vectors</Name>
     <Value>0</Value>
 </Widget>

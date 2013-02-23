@@ -97,12 +97,13 @@ public:
     void    drawVelocity();
     void    drawPressure();
     void    drawTemperature();
+    void    drawInputVectors();
     
     bool bIsAddingDye;
     bool bDrawVelocity;
     bool bDrawPressure;
     bool bDrawTemperature;
-    
+    bool bDrawInputVectors;
     
 private:
     void    setTextureToBuffer(ofTexture & _tex, ofxSwapBuffer & _buffer);

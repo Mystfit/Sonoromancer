@@ -67,9 +67,13 @@ public:
     
     //UI
     void initGui();
-    ofxUICanvas *gui;
+    ofxUICanvas *optionsGui;
+    ofxUICanvas *statusGui;
+    ofxUICanvas *fluidGui;
+
     void exit();
-    void guiEvent(ofxUIEventArgs &e);
+    void optionGuiEvent(ofxUIEventArgs &e);
+    void fluidGuiEvent(ofxUIEventArgs &e);
     
     //Kinect control
     FluidKinect fluidKinect;

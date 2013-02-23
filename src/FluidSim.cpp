@@ -436,10 +436,6 @@ void FluidSim::update(){
                 applyImpulse(velocityBuffer , constantForces[i].pos, constantForces[i].vel, constantForces[i].rad);
         }
     
-    
-    
-    
-    
     computeDivergence();
     pressureBuffer.src->begin();
     ofClear(0);
@@ -450,15 +446,9 @@ void FluidSim::update(){
         pressureBuffer.swap();
     }
     
-
-    
     subtractGradient();
     velocityBuffer.swap();
-    
-    //ofEnableBlendMode(OF_BLENDMODE_ADD);
-    //ofDisableBlendMode();
-    //glDisable(GL_BLEND);
- 
+
     ofPopStyle();
 
 }
@@ -467,18 +457,28 @@ void FluidSim::drawVelocity(){
     bDrawVelocity = true;
     bDrawPressure = false;
     bDrawTemperature = false;
+    bDrawInputVectors = false;
 }
 
 void FluidSim::drawPressure(){
     bDrawVelocity = false;
     bDrawPressure = true;
     bDrawVelocity = false;
+    bDrawInputVectors = false;
 }
 
 void FluidSim::drawTemperature(){
     bDrawVelocity = false;
     bDrawPressure = false;
     bDrawTemperature = true;
+    bDrawInputVectors = false;
+}
+
+void FluidSim::drawInputVectors(){
+    bDrawVelocity = false;
+    bDrawPressure = false;
+    bDrawTemperature = false;
+    bDrawInputVectors = true;
 }
 
 
@@ -487,7 +487,8 @@ void FluidSim::draw(int x, int y, float _width, float _height){
     if (_height == -1) _height = height;
     
     ofPushStyle();
-    //glEnable(GL_BLEND);
+    
+    //ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(255);
     
     if(bDrawVelocity)
@@ -496,9 +497,10 @@ void FluidSim::draw(int x, int y, float _width, float _height){
         pingPong.src->draw(x,y,_width,_height);
     if(bDrawTemperature)
         temperatureBuffer.src->draw(x,y,_width,_height);
+    if(bDrawInputVectors)
+        externalVelocityBuffer.src->draw(x,y,_width,_height);
     
-    //textures[0].draw(x,y,_width,_height);
-    glDisable(GL_BLEND);
+    //ofDisableBlendMode();
     ofPopStyle();
 }
 

@@ -94,7 +94,7 @@ public:
     {
         ofPushStyle(); 
         
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA); 
+        ofEnableBlendMode(OF_BLENDMODE_ADD); 
         
         drawPadded();
         drawPaddedOutline();        
@@ -106,6 +106,8 @@ public:
         
         drawFill();
         drawFillHighlight();
+        
+        ofDisableBlendMode();
         
         ofPopStyle();
     }

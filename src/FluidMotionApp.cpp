@@ -5,7 +5,7 @@
 void FluidMotionApp::setup(){
     
     //ofEnableAlphaBlending();
-	ofSetWindowShape(512, 512);
+	ofSetWindowShape(1024, 1024);
     ofSetLogLevel(OF_LOG_NOTICE);
     ofEnableArbTex();
     
@@ -100,32 +100,49 @@ void FluidMotionApp::decreaseThreshold()
 //--------------------------------------------------------------
 void FluidMotionApp::exit()
 {
-	gui->saveSettings("GUI/guiSettings.xml");
-    delete gui;
+	optionsGui->saveSettings("GUI/guiSettings.xml");
+    delete optionsGui;
 }
 
 void FluidMotionApp::initGui(){
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
     float length = 255-xInit;
     
+    
+    //Setup options gui
+    //-----------------
     vector<string> texList;
 	texList.push_back("Velocity");
 	texList.push_back("Pressure");
 	texList.push_back("Temperature");
+    texList.push_back("Kinect Vectors");
     
-    gui = new ofxUICanvas(0,0,1024,1024);
-    gui->addWidgetDown(new ofxUILabel("SONOROMANCER OPTIONS", OFX_UI_FONT_LARGE));
-    gui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
-    gui->addWidgetDown(new ofxUILabel("FPS", OFX_UI_FONT_MEDIUM));
-    gui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
-    gui->addSpacer(length-xInit, 2);
-    gui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    optionsGui = new ofxUICanvas(0,0,length-xInit,ofGetHeight());
+    optionsGui->addWidgetDown(new ofxUILabel("OPTIONS", OFX_UI_FONT_LARGE));
+    optionsGui->addSpacer(length-xInit, 2);
+    optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
+    optionsGui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
+    optionsGui->addSpacer(length-xInit, 2);
+    optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
 
-    ofAddListener(gui->newGUIEvent, this, &FluidMotionApp::guiEvent);
-    gui->loadSettings("GUI/guiSettings.xml");
+    ofAddListener(optionsGui->newGUIEvent, this, &FluidMotionApp::optionGuiEvent);
+    optionsGui->loadSettings("GUI/guiSettings.xml");
+    
+    
+    //Setup status gui
+    //-----------------
+    statusGui = new ofxUICanvas(length+xInit+2,0,length-xInit,ofGetHeight());
+
+    
+    //Setup status gui
+    //-----------------
+    fluidGui = new ofxUICanvas(length*2+xInit*2+4,0,length-xInit,ofGetHeight());
+
+
 }
 
-void FluidMotionApp::guiEvent(ofxUIEventArgs &e)
+
+void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
 {
     ofLog(OF_LOG_NOTICE, "--> Inside gui event. " + e.widget->getName());
 
@@ -147,6 +164,9 @@ void FluidMotionApp::guiEvent(ofxUIEventArgs &e)
 
     } else if(e.widget->getName() == "Temperature"){
         if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawTemperature();
+    
+    } else if(e.widget->getName() == "Kinect Vectors"){
+        if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawInputVectors();
     }
 
 }
@@ -255,20 +275,20 @@ void FluidMotionApp::draw(){
     if(bDrawFluid)
         (!isPlayingBackFrames) ? fluid.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight()) : fluidPlayback.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight());;
     if(bDrawBlobs) blobFinder.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight());
-    
-    ofSetHexColor(0xFFFFFF);
-    
-    string instrumentStr = "Instrument: " + fluidPlayer.getActiveInstrument().name + ". ";
-    
-    ofDrawBitmapString(instrumentStr, 10.0f, 10.0f);
-    
-    if(!fluidPlayer.isPlaying)
-        ofDrawBitmapString(instrumentStr + "Waiting for play message from Live",10.0f,10.0f);
-    else if(isRecordingFrames)
-        ofDrawBitmapString(instrumentStr + "Recording performance",10.0f,10.0f);
-    else if(isPlayingBackFrames)
-        ofDrawBitmapString(instrumentStr + "Saving hiRez simulation...", 10.0f,10.0f);
-    
+//    
+//    ofSetHexColor(0xFFFFFF);
+//    
+//    string instrumentStr = "Instrument: " + fluidPlayer.getActiveInstrument().name + ". ";
+//    
+//    ofDrawBitmapString(instrumentStr, 10.0f, 10.0f);
+//    
+//    if(!fluidPlayer.isPlaying)
+//        ofDrawBitmapString(instrumentStr + "Waiting for play message from Live",10.0f,10.0f);
+//    else if(isRecordingFrames)
+//        ofDrawBitmapString(instrumentStr + "Recording performance",10.0f,10.0f);
+//    else if(isPlayingBackFrames)
+//        ofDrawBitmapString(instrumentStr + "Saving hiRez simulation...", 10.0f,10.0f);
+//    
     ofDisableBlendMode();
     ofPopStyle();
 }
@@ -278,7 +298,7 @@ void FluidMotionApp::keyPressed(int key){
     if( key == 'p')
         bPaint = !bPaint;
     if( key == 'h')
-        gui->toggleVisible();
+        optionsGui->toggleVisible();
     if( key == 'o')
         bDrawFluid = !bDrawFluid;
     if( key == 'i')
@@ -350,10 +370,10 @@ void FluidMotionApp::mouseDragged(int x, int y, int button){
 void FluidMotionApp::mousePressed(int x, int y, int button){
     bMouseHeld = true;
     
-    if(button == 0)
-        fluidPlayer.nextInstrument();
-    else if(button == 2)
-        fluidPlayer.prevInstrument();
+//    if(button == 0)
+//        fluidPlayer.nextInstrument();
+//    else if(button == 2)
+//        fluidPlayer.prevInstrument();
 }
 
 //--------------------------------------------------------------
