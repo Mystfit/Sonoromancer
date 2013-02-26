@@ -12,8 +12,9 @@
 #include <iostream>
 
 #include "ofMain.h"
-#include "ofxCvMain.h"
 #include "ofxOpenNI.h"
+#include "ofxOpenCv.h"
+#include "ofxOpticalFlowLK.h"
 
 #define CAMERA_WIDTH 640
 #define CAMERA_HEIGHT 480
@@ -41,6 +42,7 @@ private:
     
 	bool				isLive, isTracking, isMasking, isFiltering;
 	int					nearThreshold, farThreshold;
+    float               opFlowWidth, opFlowHeight;
 	float				filterFactor;
     ofImage				allUserMasks, user1Mask, user2Mask, depthRangeMask;
     
@@ -53,6 +55,7 @@ private:
     ofxCvGrayscaleImage maskImage;
     ofPixels depthPixels;
     ofTexture maskTexture;
+    ofPixels maskPixels;
     int opticalBlur;
     
 public:
@@ -64,11 +67,16 @@ public:
     
     bool isDeviceConnected;
     
+    ofxOpticalFlowLK opFlow;
+    void updateOpticalFlow(ofTexture & maskedKinect);
+    
+    ofxCvColorImage blurImage;
     
     ofTexture & getCameraTexture(){ return recordImage.getTexture(); };
     ofTexture & getDepthTexture(){ return recordDepth.depth_texture; };
     ofTexture & getMaskTexture(){ return maskTexture; };
-    
+
+
 };
 
     

@@ -61,12 +61,21 @@ void FluidKinect::init()
     cameraImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     cameraDepthImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     
+    blurImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, GL_RGBA);
     maskImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     
     depthPixels.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, OF_PIXELS_RGB);
     maskTexture.allocate(CAMERA_WIDTH, CAMERA_HEIGHT , GL_LUMINANCE);
+    maskPixels.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, OF_PIXELS_RGBA);
     
-   }
+    //Setup optical flow
+    opFlowWidth = OPFLOW_WIDTH;
+    opFlowHeight = OPFLOW_HEIGHT;
+    opFlow.setup(ofRectangle(0,0, opFlowWidth, opFlowHeight ));
+    opFlow.setOpticalFlowBlur(15);
+    opFlow.setOpticalFlowSize(5);
+    
+}
 
 void FluidKinect::update()
 {
@@ -90,6 +99,14 @@ void FluidKinect::update()
     }
 }
 
+void FluidKinect::updateOpticalFlow(ofTexture & maskedKinect)
+{
+    maskedKinect.readToPixels(maskPixels);    
+    blurImage.setFromPixels(maskPixels);
+    blurImage.resize(opFlow.sizeSml.width, opFlow.sizeSml.height);
+    blurImage.flagImageChanged();
+    opFlow.update(blurImage);
+}
 
 
 void FluidKinect::draw()
@@ -98,8 +115,8 @@ void FluidKinect::draw()
     //recordDepth.draw(0,0,320,240);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_DST_COLOR);
-    //blurImage.draw(ofGetScreenWidth() - blurImage.width,0);
-    //opFlow.draw(ofGetScreenWidth() - OPFLOW_WIDTH, 0, OPFLOW_WIDTH, OPFLOW_HEIGHT);
+    blurImage.draw(ofGetScreenWidth() - blurImage.width,0);
+    opFlow.draw(ofGetScreenWidth() - OPFLOW_WIDTH, 0, OPFLOW_WIDTH, OPFLOW_HEIGHT);
     glDisable(GL_BLEND);
     
     if (isTracking){
