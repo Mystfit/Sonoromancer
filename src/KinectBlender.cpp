@@ -71,7 +71,7 @@ void KinectBlender::init(int w, int h, int outWidth, int outHeight)
     blenderHeight = outHeight;
     
     blendBuffer.allocate(blenderWidth, blenderHeight, GL_RGBA32F_ARB);
-    kinectBuffer.allocate(width, width, GL_RGB);
+    kinectBuffer.allocate(width, height, GL_RGB);
 }
 
 ofFbo * KinectBlender::updateBlender(ofTexture & redChan, ofTexture & greenChan, ofTexture & blueChan, ofTexture & mask, float maxDist, float minDist)

@@ -19,6 +19,7 @@ void FluidMotionApp::setup(){
     
     texBlender.init(CAMERA_WIDTH, CAMERA_HEIGHT, LOWREZ_FLUID_SIZE, LOWREZ_FLUID_SIZE);
     kinectSavedOpflowBlender.init(CAMERA_WIDTH, CAMERA_HEIGHT, LOWREZ_FLUID_SIZE, LOWREZ_FLUID_SIZE);
+    opFlowThread.init();
     
     //Buffer for saving images
     velocityBufferPixels.allocate(HIREZ_FLUID_SIZE, HIREZ_FLUID_SIZE, 3);
@@ -102,11 +103,13 @@ void FluidMotionApp::exit()
 {
 	optionsGui->saveSettings("GUI/guiSettings.xml");
     delete optionsGui;
+    
+    fluidPlayer.clearAllNotes();
 }
 
 void FluidMotionApp::initGui(){
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float length = 255-xInit;
+    float length = 255-xInit;   
     
     
     //Setup options gui
@@ -115,15 +118,20 @@ void FluidMotionApp::initGui(){
 	texList.push_back("Velocity");
 	texList.push_back("Pressure");
 	texList.push_back("Temperature");
-    texList.push_back("Kinect Vectors");
+    texList.push_back("User Masks");
+    texList.push_back("User Velocity");
     
     optionsGui = new ofxUICanvas(0,0,length-xInit,ofGetHeight());
     optionsGui->addWidgetDown(new ofxUILabel("OPTIONS", OFX_UI_FONT_LARGE));
     optionsGui->addSpacer(length-xInit, 2);
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
+    optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "SHOW INPUT"));
+    optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "USE MASKED INPUT"));
+
     optionsGui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
     optionsGui->addSpacer(length-xInit, 2);
     optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    optionsGui->addSpacer(length-xInit, 2);
 
     ofAddListener(optionsGui->newGUIEvent, this, &FluidMotionApp::optionGuiEvent);
     optionsGui->loadSettings("GUI/guiSettings.xml");
@@ -156,6 +164,12 @@ void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         ofSetFullscreen(toggle->getValue());
         
+    } else if(e.widget->getName() == "SHOW INPUT"){
+        bDrawKinect = ((ofxUIToggle *)e.widget)->getValue();
+        
+    } else if(e.widget->getName() == "USE MASKED INPUT"){
+        bUseMaskedInput = ((ofxUIToggle *)e.widget)->getValue();
+    
     } else if(e.widget->getName() == "Velocity"){
         if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawVelocity();
     
@@ -164,8 +178,11 @@ void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
 
     } else if(e.widget->getName() == "Temperature"){
         if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawTemperature();
+        
+    } else if(e.widget->getName() == "User Masks"){
+        //if( ((ofxUIToggle *)e.widget)->getValue() == true) fluidKinect.drawUsers();
     
-    } else if(e.widget->getName() == "Kinect Vectors"){
+    } else if(e.widget->getName() == "User Velocity"){
         if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawInputVectors();
     }
 
@@ -181,30 +198,40 @@ void FluidMotionApp::update(){
     if(fluidKinect.isDeviceConnected){
         
         if(!isPlayingBackFrames)
-        {
-            //if(fluidPlayer.isPlaying) isRecordingFrames = true;
-            
+        {            
             //Update kinect cameras
             fluidKinect.update();
             
-            //Mask kinect camera
-            texBlender.updateKinectMasker(fluidKinect.getCameraTexture(), fluidKinect.getMaskTexture(), CAMERA_WIDTH, CAMERA_HEIGHT);
+            //Update optical flow
+            //The two textures to choose between are the masked and unmasked versions of the kinect camera.
+            //The masked texture generates noisy opFlow vectors, whilst the raw input generates smooth vectors
+//            if(bUseMaskedInput){
+//                texBlender.updateKinectMasker(fluidKinect.getCameraTexture(), fluidKinect.getMaskTexture(), CAMERA_WIDTH, CAMERA_HEIGHT);
+//                fluidKinect.updateOpticalFlow(texBlender.kinectBuffer.dst->getTextureReference());
+//            } else {
+//                fluidKinect.updateOpticalFlow(fluidKinect.getCameraTexture());
+//            }
             
-            //Update optical flow with masked kinect image
-            fluidKinect.updateOpticalFlow(texBlender.kinectBuffer.dst->getTextureReference());
-            
+            opFlowThread.setKinectTexture(fluidKinect.getCameraTexture());
+                        
+            opFlowThread.lock();
             //Blend optical flow velocites and depth camera
-            texBlender.updateBlender( fluidKinect.opFlow.velTexX.getTextureReference(), fluidKinect.opFlow.velTexY.getTextureReference(), fluidKinect.getDepthTexture(), fluidKinect.getMaskTexture(), depthActivationStart, depthActivationEnd);
+            texBlender.updateBlender( opFlowThread.getVelXTex(), opFlowThread.getVelYTex(), fluidKinect.getDepthTexture(), fluidKinect.getMaskTexture(), depthActivationStart, depthActivationEnd);
+            opFlowThread.unlock();
             
-            if(isRecordingFrames){
-                kinectSavedOpflowBlender.updateBlender( fluidKinect.opFlow.velTexX.getTextureReference(), fluidKinect.opFlow.velTexY.getTextureReference(), fluidKinect.getDepthTexture(), fluidKinect.getMaskTexture(), depthActivationStart, depthActivationEnd)->readToPixels(playbackPixels);
-                //texBlender.blendBuffer.dst->readToPixels(playbackPixels);
-                fluidInputTextures.push_back( playbackPixels );
-                fluidRecordedColour.push_back(fluidPlayer.getActiveInstrument().dyeColour);
-            }
+//            if(isRecordingFrames){
+//                kinectSavedOpflowBlender.updateBlender( fluidKinect.opFlow.velTexX.getTextureReference(), fluidKinect.opFlow.velTexY.getTextureReference(), fluidKinect.getDepthTexture(), fluidKinect.getMaskTexture(), depthActivationStart, depthActivationEnd)->readToPixels(playbackPixels);
+//                //texBlender.blendBuffer.dst->readToPixels(playbackPixels);
+//                fluidInputTextures.push_back( playbackPixels );
+//                fluidRecordedColour.push_back(fluidPlayer.getActiveInstrument().dyeColour);
+//            }
             
             //Send camera velocities to fluid simulation
             fluid.setExternalVelocity(  texBlender.blendBuffer.dst->getTextureReference() );
+            
+            //Set colours of dye based on user mask
+            //fluid.setUserMasking( texBlender.blendUser.dst->getTextureReference());
+            
             fluid.setDyeColour(fluidPlayer.getActiveInstrument().dyeColour);
             fluid.update();    
         
@@ -270,6 +297,8 @@ void FluidMotionApp::draw(){
         fluidPlayer.setBeatClean();
     }
     
+    if(bDrawKinect) fluidKinect.draw();
+    
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
     if(bDrawFluid)
@@ -307,8 +336,6 @@ void FluidMotionApp::keyPressed(int key){
         bDrawBlobs = ! bDrawBlobs;
     if( key == 'b')
         bCalculateBlobs = ! bCalculateBlobs;
-    if( key == 'y')
-        fluidKinect.opFlow.bDrawLines != fluidKinect.opFlow.bDrawLines;
     if( key == 'v')
         fluid.bDrawVelocity != fluid.bDrawVelocity;
     if( key == 'c')

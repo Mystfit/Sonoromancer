@@ -27,6 +27,7 @@
 		4A2A2D081643AF9A00CE7397 /* ofxTrackedHand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A2CE01643AF9900CE7397 /* ofxTrackedHand.cpp */; };
 		4A2A2D091643AF9A00CE7397 /* ofxTrackedUser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A2CE21643AF9900CE7397 /* ofxTrackedUser.cpp */; };
 		4A2A2D0A1643AF9A00CE7397 /* ofxUserGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A2CE41643AF9900CE7397 /* ofxUserGenerator.cpp */; };
+		4A4522A516DC57D000FFD809 /* OpFlowThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A4522A316DC57D000FFD809 /* OpFlowThread.cpp */; };
 		4A5D8C931643C88400BA0FE4 /* libnimCodecs.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C851643C88400BA0FE4 /* libnimCodecs.dylib */; };
 		4A5D8C941643C88400BA0FE4 /* libnimMockNodes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C861643C88400BA0FE4 /* libnimMockNodes.dylib */; };
 		4A5D8C951643C88400BA0FE4 /* libnimRecorder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C871643C88400BA0FE4 /* libnimRecorder.dylib */; };
@@ -382,6 +383,8 @@
 		4A411FBC16D48C190002307D /* ofxUIWaveform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWaveform.h; sourceTree = "<group>"; };
 		4A411FBD16D48C190002307D /* ofxUIWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidget.h; sourceTree = "<group>"; };
 		4A411FBE16D48C190002307D /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
+		4A4522A316DC57D000FFD809 /* OpFlowThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpFlowThread.cpp; sourceTree = "<group>"; };
+		4A4522A416DC57D000FFD809 /* OpFlowThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpFlowThread.h; sourceTree = "<group>"; };
 		4A5D8C841643C88400BA0FE4 /* change_exec_paths.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = change_exec_paths.sh; sourceTree = "<group>"; };
 		4A5D8C851643C88400BA0FE4 /* libnimCodecs.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimCodecs.dylib; sourceTree = "<group>"; };
 		4A5D8C861643C88400BA0FE4 /* libnimMockNodes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimMockNodes.dylib; sourceTree = "<group>"; };
@@ -1424,6 +1427,8 @@
 		4AB239811625520B00DEC0BB /* kinect */ = {
 			isa = PBXGroup;
 			children = (
+				4A4522A316DC57D000FFD809 /* OpFlowThread.cpp */,
+				4A4522A416DC57D000FFD809 /* OpFlowThread.h */,
 				4AB2397E1625520500DEC0BB /* FluidKinect.cpp */,
 				4AB2397F1625520500DEC0BB /* FluidKinect.h */,
 			);
@@ -1880,6 +1885,7 @@
 				91DF436C164678A100F514AA /* ofxMidiIn.cpp in Sources */,
 				91DF436D164678A100F514AA /* ofxMidiMessage.cpp in Sources */,
 				91DF436E164678A100F514AA /* ofxMidiOut.cpp in Sources */,
+				4A4522A516DC57D000FFD809 /* OpFlowThread.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

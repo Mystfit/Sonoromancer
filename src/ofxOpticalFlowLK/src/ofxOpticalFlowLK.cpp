@@ -286,7 +286,7 @@ ofPoint ofxOpticalFlowLK::getVelAtPixel(int x, int y) {
 //	DRAW.
 ///////////////////////////////////////////
 
-void ofxOpticalFlowLK::draw(int width, int height,  float lineScale, int res) {
+void ofxOpticalFlowLK::draw(int xPos, int yPos, int width, int height,  float lineScale, int res) {
     
 //    if(bDrawLines)
 //    {
@@ -309,7 +309,7 @@ void ofxOpticalFlowLK::draw(int width, int height,  float lineScale, int res) {
                 //ofSetHexColor (ofColor(vel.x,vel.y,0.0f).getHex() );
                 ofSetHexColor ( ofColor(255,255,255).getHex() );
 
-                ofLine(x, y, x + vel.x * lineScale, y + vel.y * lineScale);
+                ofLine(x + xPos, y + yPos, x + xPos + vel.x * lineScale, y + yPos + vel.y * lineScale);
                 
             }
         }

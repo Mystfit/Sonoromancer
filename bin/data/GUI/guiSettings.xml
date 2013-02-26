@@ -5,6 +5,16 @@
 </Widget>
 <Widget>
     <Kind>2</Kind>
+    <Name>SHOW INPUT</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>USE MASKED INPUT</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
     <Name>Velocity</Name>
     <Value>0</Value>
 </Widget>
@@ -20,6 +30,11 @@
 </Widget>
 <Widget>
     <Kind>2</Kind>
-    <Name>Kinect Vectors</Name>
+    <Name>User Masks</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>User Velocity</Name>
     <Value>0</Value>
 </Widget>

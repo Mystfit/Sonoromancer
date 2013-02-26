@@ -49,7 +49,7 @@ void FluidKinect::init()
         recordUser.setup(&recordContext);
         recordUser.setSmoothing(filterFactor);				// built in openni skeleton smoothing...
         recordUser.setUseMaskPixels(isMasking);
-        recordUser.setMaxNumberOfUsers(2);					// use this to set dynamic max number of users (NB: that a hard upper limit is defined by MAX_NUMBER_USERS in ofxUserGenerator)
+        recordUser.setMaxNumberOfUsers(5);					// use this to set dynamic max number of users (NB: that a hard upper limit is defined by MAX_NUMBER_USERS in ofxUserGenerator)
         recordContext.toggleRegisterViewport();
         recordContext.toggleMirror();
         
@@ -61,21 +61,12 @@ void FluidKinect::init()
     cameraImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     cameraDepthImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     
-    blurImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, GL_RGBA);
     maskImage.allocate(CAMERA_WIDTH, CAMERA_HEIGHT);
     
     depthPixels.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, OF_PIXELS_RGB);
     maskTexture.allocate(CAMERA_WIDTH, CAMERA_HEIGHT , GL_LUMINANCE);
-    maskPixels.allocate(CAMERA_WIDTH, CAMERA_HEIGHT, OF_PIXELS_RGBA);
     
-    //Setup optical flow
-    opFlowWidth = OPFLOW_WIDTH;
-    opFlowHeight = OPFLOW_HEIGHT;
-    opFlow.setup(ofRectangle(0,0, opFlowWidth, opFlowHeight ));
-    opFlow.setOpticalFlowBlur(15);
-    opFlow.setOpticalFlowSize(5);
-    
-}
+   }
 
 void FluidKinect::update()
 {
@@ -93,46 +84,22 @@ void FluidKinect::update()
             hardware.setLedOption(LED_BLINK_RED_YELLOW);
         }
         
-		if (isTracking && isMasking) {
-//            cameraImage.setFromPixels(recordImage.getPixels(), recordUser.getWidth(), recordUser.getHeight());
-//            maskImage.setFromPixels( recordUser.getUserPixels(), recordUser.getWidth(), recordUser.getHeight());
+		if (isTracking && isMasking)
               maskTexture.loadData(recordUser.getUserPixels(),recordUser.getWidth(), recordUser.getHeight(), GL_LUMINANCE);
-//                        
-//            cameraImage.flagImageChanged();
-//            maskImage.flagImageChanged();
-//            
-//            cameraImage.resize(320, 240);
-//            maskImage.resize(320, 240);
-            
-            //Get blur image from shader instead!
-
-//            blurImage = cameraImage;
-//            blurImage *= maskImage;
-//            opFlow.update(blurImage);
-            
-        }
+        
     }
 }
-
-void FluidKinect::updateOpticalFlow(ofTexture & maskedKinect)
-{
-    maskedKinect.readToPixels(maskPixels);    
-    blurImage.setFromPixels(maskPixels);
-    blurImage.resize(opFlow.sizeSml.width, opFlow.sizeSml.height);
-    blurImage.flagImageChanged();
-    opFlow.update(blurImage);
-}
-
 
 
 
 void FluidKinect::draw()
 {
+    ofPushStyle();
     //recordDepth.draw(0,0,320,240);
     glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_DST_COLOR);
-    blurImage.draw(0,0);
-    opFlow.draw(OPFLOW_WIDTH, OPFLOW_HEIGHT);
+    glBlendFunc(GL_ONE, GL_DST_COLOR);
+    //blurImage.draw(ofGetScreenWidth() - blurImage.width,0);
+    //opFlow.draw(ofGetScreenWidth() - OPFLOW_WIDTH, 0, OPFLOW_WIDTH, OPFLOW_HEIGHT);
     glDisable(GL_BLEND);
     
     if (isTracking){
@@ -140,11 +107,13 @@ void FluidKinect::draw()
     }
     
     glPushMatrix();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-	allUserMasks.draw(CAMERA_WIDTH, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-	glDisable(GL_BLEND);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+    allUserMasks.draw(CAMERA_WIDTH, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+    glDisable(GL_BLEND);
     glPopMatrix();
+    ofPopStyle();
+
 }
 
 

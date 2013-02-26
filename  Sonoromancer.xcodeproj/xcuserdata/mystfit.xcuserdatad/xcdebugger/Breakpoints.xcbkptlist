@@ -83,17 +83,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "src/FluidKinect.h"
-         timestampString = "371813813.070777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "16"
-         endingLineNumber = "16">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../../../addons/ofxOpticalFlowLK/src/ofxOpticalFlowLK.cpp"
          timestampString = "372171133.496015"
          startingColumnNumber = "9223372036854775807"
@@ -170,25 +159,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "src/FluidKinect.h"
-         timestampString = "383193996.223968"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "class FluidKinect"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "src/FluidMotionApp.cpp"
-         timestampString = "383029946.114086"
+         timestampString = "383545127.686842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "67"
-         endingLineNumber = "67"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
          landmarkName = "FluidMotionApp::decreaseFarDepth()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -197,11 +173,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/FluidKinect.cpp"
-         timestampString = "383193996.223968"
+         timestampString = "383545127.686842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116">
+         startingLineNumber = "92"
+         endingLineNumber = "92">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -655,11 +631,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/FluidMotionApp.h"
-         timestampString = "383029946.114086"
+         timestampString = "383545127.686842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21">
+         startingLineNumber = "22"
+         endingLineNumber = "22">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -857,11 +833,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "src/FluidMotionApp.cpp"
-         timestampString = "372903252.810128"
+         timestampString = "383545127.686842"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "23"
-         endingLineNumber = "23"
+         startingLineNumber = "24"
+         endingLineNumber = "24"
          landmarkName = "FluidMotionApp::setup()"
          landmarkType = "5">
       </FileBreakpoint>

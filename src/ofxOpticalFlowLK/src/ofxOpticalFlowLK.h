@@ -41,7 +41,7 @@ public :
 	ofPoint getVelAtNorm(float x, float y);
 	ofPoint getVelAtPixel(int x, int y);
 	
-	void draw(int width = OPTICAL_FLOW_DEFAULT_WIDTH, int height = OPTICAL_FLOW_DEFAULT_HEIGHT, float lineScale = 10, int res = 6);
+	void draw(int xPos, int yPos, int width = OPTICAL_FLOW_DEFAULT_WIDTH, int height = OPTICAL_FLOW_DEFAULT_HEIGHT, float lineScale = 10, int res = 6);
 	
 	void setMirror(bool mirrorHorizontally = false, bool mirrorVertically = false);
 	

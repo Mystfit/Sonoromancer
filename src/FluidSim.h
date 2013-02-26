@@ -77,6 +77,7 @@ public:
     //FluidSim&   setDensity(ofTexture & _tex){setTextureToBuffer(_tex, densityBuffer); return * this; };
     FluidSim&   setTexture(ofTexture & _tex){setTextureToBuffer(_tex, pingPong); return * this; };
     FluidSim&   setExternalVelocity(ofTexture & _tex){setTextureToBuffer(_tex, externalVelocityBuffer); return * this; };
+    FluidSim&   setUserMasking(ofTexture & _tex){setTextureToBuffer(_tex, usersMaskBuffer); return * this; };
     FluidSim&   setVelocity(ofTexture & _tex){setTextureToBuffer(_tex, velocityBuffer); return * this; };
     FluidSim&   setTemperature(ofTexture & _tex){setTextureToBuffer(_tex, temperatureBuffer); return * this; };
     FluidSim&   setGravity(ofPoint _force){ gForce = _force; return * this;};
@@ -130,6 +131,7 @@ private:
     
     ofxSwapBuffer velocityBuffer;
     ofxSwapBuffer externalVelocityBuffer;
+    ofxSwapBuffer usersMaskBuffer;
     
     ofxSwapBuffer temperatureBuffer;
     ofxSwapBuffer pressureBuffer;

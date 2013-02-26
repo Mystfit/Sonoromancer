@@ -15,6 +15,7 @@
 #include "FluidPlayer.h"
 #include "FluidKinect.h"
 #include "KinectBlender.h"
+#include "OpFlowThread.h"
 
 
 #define LOWREZ_FLUID_SIZE 256
@@ -77,7 +78,10 @@ public:
     
     //Kinect control
     FluidKinect fluidKinect;
+    OpFlowThread opFlowThread;
+    
     bool bDrawKinect;
+    bool bUseMaskedInput;
     float depthActivationStart, depthActivationEnd;
     void increaseFarDepth();
     void decreaseFarDepth();
