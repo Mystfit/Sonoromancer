@@ -108,7 +108,8 @@ void FluidMotionApp::exit()
 
 void FluidMotionApp::initGui(){
     float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float length = 255-xInit;   
+    float length = 255-xInit;
+    int dim = 16;
     
     
     //Setup options gui
@@ -123,14 +124,17 @@ void FluidMotionApp::initGui(){
     optionsGui = new ofxUICanvas(0,0,length-xInit,ofGetHeight());
     optionsGui->addWidgetDown(new ofxUILabel("OPTIONS", OFX_UI_FONT_LARGE));
     optionsGui->addSpacer(length-xInit, 2);
+    optionsGui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "SHOW INPUT"));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "USE MASKED INPUT"));
+    optionsGui->addRangeSlider("CAM. DEPTH", 0.0, 1.0, 0.06, 0.1, length-xInit, dim);
 
-    optionsGui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
     optionsGui->addSpacer(length-xInit, 2);
-    optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
     optionsGui->addSpacer(length-xInit, 2);
+    
+    optionsGui->addLabelButton("SAVE INSTRUMENTS", false);
 
     ofAddListener(optionsGui->newGUIEvent, this, &FluidMotionApp::optionGuiEvent);
     optionsGui->loadSettings("GUI/guiSettings.xml");
@@ -144,8 +148,6 @@ void FluidMotionApp::initGui(){
     //Setup status gui
     //-----------------
     fluidGui = new ofxUICanvas(length*2+xInit*2+4,0,length-xInit,ofGetHeight());
-
-
 }
 
 
@@ -183,6 +185,14 @@ void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
     
     } else if(e.widget->getName() == "User Velocity"){
         if( ((ofxUIToggle *)e.widget)->getValue() == true) fluid.drawInputVectors();
+    
+    } else if(e.widget->getName() == "CAM. DEPTH"){
+        ofxUIRangeSlider * slider = (ofxUIRangeSlider *) e.widget;
+        depthActivationStart = slider->getScaledValueLow();
+        depthActivationEnd = slider->getScaledValueHigh();
+        
+    } else if(e.widget->getName() == "SAVE INSTRUMENTS"){
+        fluidPlayer.saveInstruments();
     }
 
 }
@@ -296,9 +306,16 @@ void FluidMotionApp::draw(){
     
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
+    float screenWidth, screenHeight;
+    
+    if(ofGetWindowWidth() > ofGetWindowHeight())
+        screenWidth = screenHeight = ofGetWindowHeight();
+    else
+        screenWidth = screenHeight = ofGetWindowWidth();
+            
     if(bDrawFluid)
-        (!isPlayingBackFrames) ? fluid.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight()) : fluidPlayback.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight());;
-    if(bDrawBlobs) blobFinder.draw((ofGetScreenWidth() - ofGetScreenHeight()) * 0.5f,0,ofGetScreenHeight(),ofGetScreenHeight());
+        (!isPlayingBackFrames) ? fluid.draw( (ofGetWindowWidth() * 0.5) - (screenWidth*0.5),(ofGetWindowHeight() * 0.5) - (screenHeight*0.5), screenWidth, screenHeight ) : fluidPlayback.draw((ofGetWindowWidth() * 0.5) - (screenWidth*0.5),(ofGetWindowHeight() * 0.5) - (screenHeight*0.5), screenWidth, screenHeight);
+    if(bDrawBlobs) blobFinder.draw((ofGetWindowWidth() * 0.5) - (screenWidth*0.5),(ofGetWindowHeight() * 0.5) - (screenHeight*0.5), screenWidth, screenHeight);
 //    
 //    ofSetHexColor(0xFFFFFF);
 //    
@@ -355,9 +372,9 @@ void FluidMotionApp::keyPressed(int key){
     if( key == OF_KEY_DOWN)
         decreaseNearDepth();
     if( key == OF_KEY_PAGE_UP)
-        increaseNearDepth();
+        increaseFarDepth();
     if( key == OF_KEY_PAGE_DOWN)
-        decreaseNearDepth();
+        decreaseFarDepth();
     if( key == OF_KEY_HOME)
         decreaseThreshold();
     if( key == OF_KEY_END)

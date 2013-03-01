@@ -1,0 +1,33 @@
+<instrument>
+    <properties>
+        <name>Pen&apos;s Resonance</name>
+        <device>passthrough_out</device>
+        <channel>11</channel>
+        <program>0</program>
+        <recordableChannel>25688636</recordableChannel>
+        <timbre>poly</timbre>
+        <noteMappings>note</noteMappings>
+        <colourR>0.9</colourR>
+        <colourG>0.5</colourG>
+        <colourB>0.1</colourB>
+        <usesCCNote>0</usesCCNote>
+    </properties>
+    <parameters>
+        <cc>
+            <channel>71</channel>
+            <min>40</min>
+            <max>127</max>
+            <source>blobX</source>
+            <channel>71</channel>
+            <min>40</min>
+            <max>127</max>
+            <source>curvature</source>
+        </cc>
+        <cc></cc>
+        <note>
+            <min>40</min>
+            <max>80</max>
+            <source>area</source>
+        </note>
+    </parameters>
+</instrument>

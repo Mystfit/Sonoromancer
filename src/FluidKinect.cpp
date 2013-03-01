@@ -115,8 +115,8 @@ void FluidKinect::draw()
     //recordDepth.draw(0,0,320,240);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_DST_COLOR);
-    blurImage.draw(ofGetScreenWidth() - blurImage.width,0);
-    opFlow.draw(ofGetScreenWidth() - OPFLOW_WIDTH, 0, OPFLOW_WIDTH, OPFLOW_HEIGHT);
+    blurImage.draw(ofGetWindowWidth() - blurImage.width,ofGetWindowHeight() - blurImage.height);
+    opFlow.draw(ofGetWindowWidth() - OPFLOW_WIDTH,ofGetWindowHeight() - OPFLOW_HEIGHT);
     glDisable(GL_BLEND);
     
     if (isTracking){

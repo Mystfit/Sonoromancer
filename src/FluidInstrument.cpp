@@ -20,6 +20,7 @@ FluidInstrument::FluidInstrument(string _name, string _device, int _channel, int
     program = _program;
     _timbreType = _timbreType;
     noteMapping = _noteMapping;
+    setID(1);
 }
 
 
@@ -145,6 +146,29 @@ int FluidInstrument::getParamSourceFromString(string source)
     else if(source == "noteOff")
         return INSTRUMENT_SOURCE_CCNOTEOFF;
 
+}
+
+
+/*
+ * Converts parameters constants to original strings
+ */
+string FluidInstrument::getParamStringFromSource(int source)
+{
+    ofLog(OF_LOG_NOTICE, "--> Source type: " + ofToString(source));
+    if(source == INSTRUMENT_SOURCE_BLOBX)
+        return "blobX";
+    else if(source == INSTRUMENT_SOURCE_BLOBY)
+        return "blobY";
+    else if(source == INSTRUMENT_SOURCE_CURVATURE)
+        return "curvature";
+    else if(source == INSTRUMENT_SOURCE_AREA)
+        return "area";
+    else if(source == INSTRUMENT_SOURCE_INTENSITY)
+        return "intensity";
+    else if(source == INSTRUMENT_SOURCE_CCNOTEON)
+        return "noteOn";
+    else if(source == INSTRUMENT_SOURCE_CCNOTEOFF)
+        return "noteOff";
 }
 
 

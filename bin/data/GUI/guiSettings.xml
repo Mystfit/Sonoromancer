@@ -6,12 +6,18 @@
 <Widget>
     <Kind>2</Kind>
     <Name>SHOW INPUT</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
     <Name>USE MASKED INPUT</Name>
-    <Value>1</Value>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>CAM. DEPTH</Name>
+    <HighValue>0.0850202</HighValue>
+    <LowValue>0.0323887</LowValue>
 </Widget>
 <Widget>
     <Kind>2</Kind>

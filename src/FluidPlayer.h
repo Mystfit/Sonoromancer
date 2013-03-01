@@ -27,22 +27,32 @@ class FluidPlayer : public ofxMidiListener {
 public:
     FluidPlayer();
     
+    //Updaters
     void musicTick();
     void update();
     void updateNotes();
     void sendNotes();
     void sendCC();
-    
     void newMidiMessage(ofxMidiMessage& eventArgs);
     
+    
+    // Instrument controls
     void loadInstruments();
+    void saveInstruments();
+    
+    FluidInstrument readInstrumentXML(ofxXmlSettings xmlInstrument);
+    void writeInstrumentXML(FluidInstrument instrument);
+    
     void setInstrument(FluidInstrument instrument);
     FluidInstrument getInstrumentByName(string name);
     int getInstrumentIndex(FluidInstrument instrument);
+    
     FluidInstrument getActiveInstrument(){return m_activeInstrument;};
     void nextInstrument();
     void prevInstrument();
     
+    
+    //Scale controls
     void loadScales();
     ScaleDef getScaleByName(string name);
     void setScale(ScaleDef scale){m_activeScale = scale;};
@@ -50,6 +60,8 @@ public:
     void setRootNote(int note){ m_rootNote = note; };
     int getRootNote(){return m_rootNote; };
 
+    
+    //Performance controls
     void startPerformance();
     void stopPerformance();
         
@@ -60,6 +72,8 @@ public:
     void setBeatClean(){beatDirty = false; };      //Mark beat as fresh (phat beats yo)
     void clearAllNotes(){bClearAllNotes = true;};
     
+    
+    //Blob references
     int getBlobIndexFromNoteId(int blobId);
     void blobsToNotes(vector<BlobParam> blobParameters);
     

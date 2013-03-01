@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<instrument>
+	<properties>
+		<name>reason_ominousstrings</name>
+		<device>passthrough_out</device>
+		<channel>10</channel>
+		<recordableChannel>96</recordableChannel>
+		<program>0</program>
+		<timbre>poly</timbre>
+		<noteMappings>note</noteMappings>
+		<colourR>0.5</colourR>
+		<colourG>0.8</colourG>
+		<colourB>0.8</colourB>
+		<usesCCNoteTriggers>false</usesCCNoteTriggers>
+	</properties>
+	<parameters>
+		<note>
+			<min>40</min>
+			<max>80</max>
+			<source>area</source>
+		</note>
+		<cc>
+			<channel>72</channel>
+			<source>blobX</source>
+			<min>0</min>
+			<max>127</max>
+		</cc>
+	</parameters>
+</instrument>

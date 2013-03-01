@@ -86,6 +86,7 @@ public:
     float blobParamValueFromSource(BlobParam blobParam, int source);
     int getParamSourceFromString(string source);
     InstrumentParameter getParamFromSource(int source);
+    string getParamStringFromSource(int source);
     int getNoteParamIndexFromSource(int source);
 
     

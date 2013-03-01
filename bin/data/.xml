@@ -1,0 +1,14 @@
+<instrument>
+    <properties>
+        <name></name>
+        <device></device>
+        <channel>0</channel>
+        <program>0</program>
+        <recordableChannel>30754956</recordableChannel>
+        <colourR>1</colourR>
+        <colourG>1</colourG>
+        <colourB>1</colourB>
+        <usesCCNote>0</usesCCNote>
+    </properties>
+    <parameters></parameters>
+</instrument>
