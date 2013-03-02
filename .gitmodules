@@ -1,6 +1,3 @@
-[submodule "ofxOpenNI"]
-	path = ofxOpenNI
-	url = http://github.com/Mystfit/ofxOpenNI.git
 [submodule "ofxMidi"]
 	path = ofxMidi
-	url = https://github.com/chrisoshea/ofxMidi.git
+  url = https://github.com/Mystfit/ofxMidi.git
