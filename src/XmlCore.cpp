@@ -14,7 +14,6 @@
  * Parse instrument xml
  */
 FluidInstrument XmlCore::readInstrumentXML(ofxXmlSettings xmlInstrument){
-    
     xmlInstrument.pushTag("instrument");
     xmlInstrument.pushTag("properties");
     

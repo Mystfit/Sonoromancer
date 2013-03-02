@@ -128,12 +128,16 @@ void FluidPlayer::loadInstruments()
     ofDirectory instrumentDir("instruments");
     instrumentDir.listDir();
     vector<ofFile> instrumentFiles = instrumentDir.getFiles();
+    ofLog(OF_LOG_NOTICE, "--> Loading Instruments");
     
     for(int i=0; i < instrumentFiles.size(); i++)
     {
         ofxXmlSettings xmlInstrument;
         xmlInstrument.loadFile( instrumentDir.getOriginalDirectory() + instrumentFiles[i].getFileName() );
         instrumentList.push_back(XmlCore::readInstrumentXML(xmlInstrument));
+        
+        ofLog(OF_LOG_NOTICE, instrumentDir.getOriginalDirectory() + instrumentFiles[i].getFileName());
+
     }
 }
 

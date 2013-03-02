@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<instrument>
+    <properties>
+        <name>reason_touchpad</name>
+        <device>passthrough_out</device>
+        <channel>9</channel>
+        <program>0</program>
+        <recordableChannel>96</recordableChannel>
+        <timbre>poly</timbre>
+        <noteMappings>note</noteMappings>
+        <colourR>0.7</colourR>
+        <colourG>0.4</colourG>
+        <colourB>0.7</colourB>
+        <usesCCNoteTriggers>false</usesCCNoteTriggers>
+    </properties>
+    <parameters>
+        <note>
+            <min>40</min>
+            <max>80</max>
+            <source>area</source>
+        </note>
+        <cc>
+            <channel>71</channel>
+            <source>blobX</source>
+            <min>0</min>
+            <max>127</max>
+        </cc>
+    </parameters>
+</instrument>
