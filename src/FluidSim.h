@@ -68,6 +68,16 @@ typedef struct  {
 } pForce;
 
 
+struct FluidSettings{
+    float   smokeBuoyancy;
+    float   smokeWeight;
+    float   gradientScale;
+    float   ambientTemperature;
+    float   blurStrength;
+    ofVec3f dyeColour;
+};
+
+
 class FluidSim : public ofxFXObject, public ofThread {
 public:
     FluidSim();
@@ -88,7 +98,7 @@ public:
     
     ofxSwapBuffer getVelocityBuffer(){ return velocityBuffer; };
     
-    void setDyeColour(ofVec3f colour){dyeColour = colour; };
+    void setDyeColour(ofVec3f colour){settings.dyeColour = colour; };
     
     void    addTemporalForce(ofPoint _pos, ofPoint _dir, ofFloatColor _col, float _rad = 1.0f, float _temp = 10.f, float _den = 1.f );
     void    addConstantForce(ofPoint _pos, ofPoint _dir, ofFloatColor _col, float _rad = 1.0f, float _temp = 10.f, float _den = 1.f );
@@ -143,17 +153,15 @@ private:
     vector<pForce> temporalForces;
     ofPoint gForce;
     
-    float   smokeBuoyancy;
-    float   smokeWeight;
-    float   gradientScale;
-    float   ambientTemperature;
+ 
     
-    ofVec3f dyeColour;
+    FluidSettings   settings;
     
     float   gridWidth,gridHeight;
     float   timeStep;
     float   cellSize;
     float   scale;
+    float   gradientScale;
     
     int     numJacobiIterations;
     

@@ -22,6 +22,7 @@
 #include "ofxCvBlobFinder.h"
 #include "FluidInstrument.h"
 #include "ofxCvComplexBlob.h"
+#include "XmlCore.h"
 
 class FluidPlayer : public ofxMidiListener {
 public:

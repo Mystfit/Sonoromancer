@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <instrument>
 	<properties>
-		<name>Pen's Resonance</name>
+		<name>reason_penresonance</name>
 		<device>passthrough_out</device>
 		<channel>11</channel>
 		<program>0</program>

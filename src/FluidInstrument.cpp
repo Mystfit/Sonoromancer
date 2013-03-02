@@ -154,7 +154,6 @@ int FluidInstrument::getParamSourceFromString(string source)
  */
 string FluidInstrument::getParamStringFromSource(int source)
 {
-    ofLog(OF_LOG_NOTICE, "--> Source type: " + ofToString(source));
     if(source == INSTRUMENT_SOURCE_BLOBX)
         return "blobX";
     else if(source == INSTRUMENT_SOURCE_BLOBY)

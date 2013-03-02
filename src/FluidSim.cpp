@@ -320,11 +320,19 @@ FluidSim::FluidSim(){
     
     cellSize            = 1.25f;
     gradientScale       = 1.00f / cellSize;
-    ambientTemperature  = 0.0f;
     numJacobiIterations = 40;
     timeStep            = 0.125f;
-    smokeBuoyancy       = 1.0f;
-    smokeWeight         = 0.05f;
+    
+    settings.ambientTemperature  = 0.0f;
+    settings.smokeBuoyancy       = 1.0f;
+    settings.smokeWeight         = 0.05f;
+    settings.blurStrength        = 1.0f;
+    
+    settings.ambientTemperature = 0.0f;
+    settings.smokeBuoyancy = 1.0f;
+    settings.smokeWeight = 0.05f;
+    settings.blurStrength;
+    settings.dyeColour = ofVec3f(0.8f,0.8f,0.8f);
     
     bDrawVelocity = true;
     bDrawPressure = false;
@@ -353,7 +361,7 @@ void FluidSim::allocate(int _width, int _height, float _scale, float velocitySca
     compileCode();
     
     temperatureBuffer.src->begin();
-    ofClear( ambientTemperature );
+    ofClear( settings.ambientTemperature );
     temperatureBuffer.src->end();
 }
 
@@ -412,7 +420,7 @@ void FluidSim::update(){
     velocityBuffer.swap();
     
     applyExternalDye(temperatureBuffer, externalVelocityBuffer.src->getTextureReference(), ofVec3f(20.0f, 20.0f, 20.0f));
-    applyExternalDye(pingPong, externalVelocityBuffer.src->getTextureReference(), dyeColour);
+    applyExternalDye(pingPong, externalVelocityBuffer.src->getTextureReference(), settings.dyeColour);
     //-----------------------------------
     
     
@@ -604,7 +612,7 @@ void FluidSim::applyExternalVelocity(ofxSwapBuffer& _buffer, ofTexture velocityT
     applyExternalVelocityShader.begin();
     applyExternalVelocityShader.setUniformTexture("buffer", _buffer.src->getTextureReference(), 0);
     applyExternalVelocityShader.setUniformTexture("ExternalVelocity", externalVelocityBuffer.src->getTextureReference(), 0);
-    applyExternalVelocityShader.setUniform1f("Strength", 1.0f );
+    applyExternalVelocityShader.setUniform1f("Strength", settings.blurStrength );
     
     renderFrame(gridWidth,gridHeight);
     applyExternalVelocityShader.end();
@@ -632,10 +640,10 @@ void FluidSim::applyExternalDye(ofxSwapBuffer& _buffer, ofTexture depthTex, ofVe
 void FluidSim::applyBuoyancy(){
     velocityBuffer.dst->begin();
     applyBuoyancyShader.begin();
-    applyBuoyancyShader.setUniform1f("AmbientTemperature", ambientTemperature );
+    applyBuoyancyShader.setUniform1f("AmbientTemperature", settings.ambientTemperature );
     applyBuoyancyShader.setUniform1f("TimeStep", timeStep );
-    applyBuoyancyShader.setUniform1f("Sigma", smokeBuoyancy );
-    applyBuoyancyShader.setUniform1f("Kappa", smokeWeight );
+    applyBuoyancyShader.setUniform1f("Sigma", settings.smokeBuoyancy );
+    applyBuoyancyShader.setUniform1f("Kappa", settings.smokeWeight );
     
     applyBuoyancyShader.setUniform2f("Gravity", (float)gForce.x, (float)gForce.y );
     

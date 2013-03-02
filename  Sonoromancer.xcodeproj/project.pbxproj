@@ -29,6 +29,7 @@
 		4A2A2D0A1643AF9A00CE7397 /* ofxUserGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A2A2CE41643AF9900CE7397 /* ofxUserGenerator.cpp */; };
 		4A4522A516DC57D000FFD809 /* OpFlowThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A4522A316DC57D000FFD809 /* OpFlowThread.cpp */; };
 		4A4522AD16E0041B00FFD809 /* instrumentGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A4522AB16E0041B00FFD809 /* instrumentGUI.cpp */; };
+		4A4522B116E1D35900FFD809 /* XmlCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A4522AF16E1D35800FFD809 /* XmlCore.cpp */; };
 		4A5D8C931643C88400BA0FE4 /* libnimCodecs.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C851643C88400BA0FE4 /* libnimCodecs.dylib */; };
 		4A5D8C941643C88400BA0FE4 /* libnimMockNodes.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C861643C88400BA0FE4 /* libnimMockNodes.dylib */; };
 		4A5D8C951643C88400BA0FE4 /* libnimRecorder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5D8C871643C88400BA0FE4 /* libnimRecorder.dylib */; };
@@ -388,6 +389,8 @@
 		4A4522A416DC57D000FFD809 /* OpFlowThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpFlowThread.h; sourceTree = "<group>"; };
 		4A4522AB16E0041B00FFD809 /* instrumentGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = instrumentGUI.cpp; path = UI/instrumentGUI.cpp; sourceTree = "<group>"; };
 		4A4522AC16E0041B00FFD809 /* instrumentGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = instrumentGUI.h; path = UI/instrumentGUI.h; sourceTree = "<group>"; };
+		4A4522AF16E1D35800FFD809 /* XmlCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XmlCore.cpp; sourceTree = "<group>"; };
+		4A4522B016E1D35800FFD809 /* XmlCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlCore.h; sourceTree = "<group>"; };
 		4A5D8C841643C88400BA0FE4 /* change_exec_paths.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = change_exec_paths.sh; sourceTree = "<group>"; };
 		4A5D8C851643C88400BA0FE4 /* libnimCodecs.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimCodecs.dylib; sourceTree = "<group>"; };
 		4A5D8C861643C88400BA0FE4 /* libnimMockNodes.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libnimMockNodes.dylib; sourceTree = "<group>"; };
@@ -804,8 +807,8 @@
 		4A2A2BF91643ABB000CE7397 /* Simulation */ = {
 			isa = PBXGroup;
 			children = (
-				4AA62E071643BA1100BCDEEB /* FluidSim.cpp */,
 				4A2A2BF71643AB6E00CE7397 /* FluidSim.h */,
+				4AA62E071643BA1100BCDEEB /* FluidSim.cpp */,
 			);
 			name = Simulation;
 			sourceTree = "<group>";
@@ -1752,6 +1755,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* FluidMotionApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* FluidMotionApp.cpp */,
+				4A4522B016E1D35800FFD809 /* XmlCore.h */,
+				4A4522AF16E1D35800FFD809 /* XmlCore.cpp */,
 				4A4522AE16E0042600FFD809 /* UI */,
 				4A2A2BF91643ABB000CE7397 /* Simulation */,
 				4ACFD75B162D184200028551 /* shaders */,
@@ -1900,6 +1905,7 @@
 				91DF436E164678A100F514AA /* ofxMidiOut.cpp in Sources */,
 				4A4522A516DC57D000FFD809 /* OpFlowThread.cpp in Sources */,
 				4A4522AD16E0041B00FFD809 /* instrumentGUI.cpp in Sources */,
+				4A4522B116E1D35900FFD809 /* XmlCore.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
