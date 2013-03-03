@@ -15,21 +15,9 @@
     </properties>
     <parameters>
         <note>
-            <min>60</min>
-            <max>90</max>
-            <source>blobX</source>
-        </note>
-        <cc>
-            <channel>71</channel>
+            <min>50</min>
+            <max>70</max>
             <source>area</source>
-            <min>40</min>
-            <max>127</max>
-        </cc>
-        <cc>
-            <channel>72</channel>
-            <source>curvature</source>
-            <min>40</min>
-            <max>127</max>
-        </cc>
+        </note>
     </parameters>
 </instrument>

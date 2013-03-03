@@ -16,8 +16,13 @@
 <Widget>
     <Kind>6</Kind>
     <Name>CAM. DEPTH</Name>
-    <HighValue>0.245749</HighValue>
-    <LowValue>0.144534</LowValue>
+    <HighValue>0.336032</HighValue>
+    <LowValue>0.182186</LowValue>
+</Widget>
+<Widget>
+    <Kind>25</Kind>
+    <Name>BLOB THRESHOLD</Name>
+    <Value>90.2794</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>

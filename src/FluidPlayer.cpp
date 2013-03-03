@@ -15,8 +15,10 @@ FluidPlayer::FluidPlayer()
     midiOut.listPorts(); // via instance
     midiIn.listPorts(); // via instance
 
-    midiOut.openPort("passthrough_in");	// by name
-    midiIn.openPort("passthrough_out");	// by name
+    //midiOut.openPort("passthrough_in");	// by name
+    //midiIn.openPort("passthrough_out");	// by name
+    midiOut.openPort("Network passthrough");	// by name
+    midiIn.openPort("Network passthrough");	// by name
     //midiOut.openPort("Network Sonoromancer_host");
     //midiIn.openPort("Network Sonoromancer_host");
 
@@ -125,6 +127,8 @@ int FluidPlayer::getInstrumentIndex(FluidInstrument instrument){
  */
 void FluidPlayer::loadInstruments()
 {
+    instrumentList.clear();
+    
     ofDirectory instrumentDir("instruments");
     instrumentDir.listDir();
     vector<ofFile> instrumentFiles = instrumentDir.getFiles();
@@ -137,7 +141,6 @@ void FluidPlayer::loadInstruments()
         instrumentList.push_back(XmlCore::readInstrumentXML(xmlInstrument));
         
         ofLog(OF_LOG_NOTICE, instrumentDir.getOriginalDirectory() + instrumentFiles[i].getFileName());
-
     }
 }
 

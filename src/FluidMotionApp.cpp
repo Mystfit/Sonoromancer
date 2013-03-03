@@ -32,9 +32,6 @@ void FluidMotionApp::setup(){
     dyeDensity = 0.1f;
     dyeVelocityMult = 1.0f;
     
-    //Init gui
-    initGui();
-    
     //Kinect properties
     depthActivationEnd = 0.1f;
     depthActivationStart = 0.06f;
@@ -52,6 +49,9 @@ void FluidMotionApp::setup(){
     bDrawFluid = true;
     bDrawBlobs = false;
     bCalculateBlobs = true;
+    
+    //Init gui
+    initGui();
 }
 
 void FluidMotionApp::increaseFarDepth()
@@ -128,13 +128,15 @@ void FluidMotionApp::initGui(){
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "SHOW INPUT"));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "USE MASKED INPUT"));
-    optionsGui->addRangeSlider("CAM. DEPTH", 0.0, 1.0, 0.06, 0.1, length-xInit, dim);
+    optionsGui->addRangeSlider("CAM. DEPTH", 0.0f, 1.0f, 0.06f, 0.1f, length-xInit, dim);
+    optionsGui->addMinimalSlider("BLOB THRESHOLD", 1, 150, 105, length-xInit, dim);
 
     optionsGui->addSpacer(length-xInit, 2);
     optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
     optionsGui->addSpacer(length-xInit, 2);
     
     optionsGui->addLabelButton("SAVE INSTRUMENTS", false);
+    optionsGui->addLabelButton("LOAD INSTRUMENTS", false);
 
     ofAddListener(optionsGui->newGUIEvent, this, &FluidMotionApp::optionGuiEvent);
     optionsGui->loadSettings("GUI/guiSettings.xml");
@@ -191,8 +193,16 @@ void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
         depthActivationStart = slider->getScaledValueLow();
         depthActivationEnd = slider->getScaledValueHigh();
         
+    } else if(e.widget->getName() == "BLOB THRESHOLD"){
+        ofxUIMinimalSlider * slider = (ofxUIMinimalSlider *) e.widget;
+        ofLog(OF_LOG_NOTICE, ofToString(slider->getScaledValue()));
+        threshold = slider->getScaledValue();
+        
     } else if(e.widget->getName() == "SAVE INSTRUMENTS"){
         fluidPlayer.saveInstruments();
+    
+    } else if(e.widget->getName() == "LOAD INSTRUMENTS"){
+        fluidPlayer.loadInstruments();
     }
 
 }
