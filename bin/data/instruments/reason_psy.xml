@@ -1,27 +1,27 @@
 <?xml version="1.0"?>
 <instrument>
     <properties>
-        <name>reason_penresonance</name>
+        <name>reason_psy</name>
         <device>passthrough_out</device>
-        <channel>11</channel>
+        <channel>12</channel>
         <program>0</program>
         <recordableChannel>96</recordableChannel>
         <timbre>poly</timbre>
         <noteMappings>note</noteMappings>
-        <colourR>0.9</colourR>
-        <colourG>0.5</colourG>
-        <colourB>0.1</colourB>
+        <colourR>0.0</colourR>
+        <colourG>0.7</colourG>
+        <colourB>0.5</colourB>
         <usesCCNoteTriggers>false</usesCCNoteTriggers>
     </properties>
     <parameters>
         <note>
-            <min>40</min>
-            <max>80</max>
-            <source>area</source>
+            <min>60</min>
+            <max>90</max>
+            <source>blobX</source>
         </note>
         <cc>
             <channel>71</channel>
-            <source>blobX</source>
+            <source>area</source>
             <min>40</min>
             <max>127</max>
         </cc>
