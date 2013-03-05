@@ -1,17 +1,16 @@
-<?xml version="1.0"?>
 <instrument>
     <properties>
         <name>reason_psy</name>
         <device>passthrough_out</device>
         <channel>12</channel>
         <program>0</program>
-        <recordableChannel>96</recordableChannel>
+        <recordableChannel>1044444</recordableChannel>
         <timbre>poly</timbre>
         <noteMappings>note</noteMappings>
-        <colourR>0.0</colourR>
+        <colourR>0</colourR>
         <colourG>0.7</colourG>
         <colourB>0.5</colourB>
-        <usesCCNoteTriggers>false</usesCCNoteTriggers>
+        <usesCCNote>0</usesCCNote>
     </properties>
     <parameters>
         <note>

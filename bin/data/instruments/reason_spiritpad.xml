@@ -1,35 +1,33 @@
-<?xml version="1.0"?>
 <instrument>
     <properties>
         <name>reason_spiritpad</name>
         <device>passthrough_out</device>
         <channel>6</channel>
-        <recordableChannel>96</recordableChannel>
         <program>0</program>
+        <recordableChannel>0</recordableChannel>
         <timbre>poly</timbre>
         <noteMappings>note</noteMappings>
-        <colourR>1.0</colourR>
+        <colourR>1</colourR>
         <colourG>0.2</colourG>
         <colourB>0.2</colourB>
-        <usesCCNoteTriggers>false</usesCCNoteTriggers>
+        <usesCCNote>0</usesCCNote>
     </properties>
     <parameters>
+        <cc>
+            <channel>71</channel>
+            <min>100</min>
+            <max>180</max>
+            <source>area</source>
+            <channel>72</channel>
+            <min>0</min>
+            <max>220</max>
+            <source>area</source>
+        </cc>
+        <cc></cc>
         <note>
             <min>0</min>
             <max>127</max>
             <source>blobY</source>
         </note>
-        <cc>
-            <channel>71</channel>
-            <source>area</source>
-            <min>100</min>
-            <max>180</max>
-        </cc>
-        <cc>
-            <channel>72</channel>
-            <source>area</source>
-            <min>0</min>
-            <max>220</max>
-        </cc>
     </parameters>
 </instrument>

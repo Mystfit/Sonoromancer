@@ -1,7 +1,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>FULLSCREEN</Name>
-    <Value>1</Value>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -22,7 +22,7 @@
 <Widget>
     <Kind>25</Kind>
     <Name>BLOB THRESHOLD</Name>
-    <Value>90.2794</Value>
+    <Value>121.648</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -47,5 +47,25 @@
 <Widget>
     <Kind>2</Kind>
     <Name>User Velocity</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>17</Kind>
+    <Name>Network Sonoromancer_Client</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>17</Kind>
+    <Name>passthrough_in</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>17</Kind>
+    <Name>Network Sonoromancer_Client</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>17</Kind>
+    <Name>passthrough_out</Name>
     <Value>0</Value>
 </Widget>

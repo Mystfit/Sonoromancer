@@ -38,17 +38,21 @@ public:
     
     
     // Instrument controls
+    void setMidiDevice(string device, int target);
+    
+    enum midiDirection{ MIDI_IN = 0, MIDI_OUT };
+
     void loadInstruments();
     void saveInstruments();
     
     FluidInstrument readInstrumentXML(ofxXmlSettings xmlInstrument);
     void writeInstrumentXML(FluidInstrument instrument);
     
-    void setInstrument(FluidInstrument instrument);
-    FluidInstrument getInstrumentByName(string name);
-    int getInstrumentIndex(FluidInstrument instrument);
+    void setInstrument(FluidInstrument * instrument);
+    FluidInstrument * getInstrumentByName(string name);
+    int getInstrumentIndex(FluidInstrument * instrument);
     
-    FluidInstrument getActiveInstrument(){return m_activeInstrument;};
+    FluidInstrument * getActiveInstrument(){return m_activeInstrument;};
     void nextInstrument();
     void prevInstrument();
     
@@ -73,14 +77,16 @@ public:
     void setBeatClean(){beatDirty = false; };      //Mark beat as fresh (phat beats yo)
     void clearAllNotes(){bClearAllNotes = true;};
     
-    
+    ofxMidiIn getMidiIn(){return midiIn;};
+    ofxMidiOut getMidiOut(){return midiOut;};
+
     //Blob references
     int getBlobIndexFromNoteId(int blobId);
     void blobsToNotes(vector<BlobParam> blobParameters);
     
 private:
-    FluidInstrument m_activeInstrument;
-    vector<FluidInstrument> instrumentList;
+    FluidInstrument * m_activeInstrument;
+    vector<FluidInstrument * > instrumentList;
     vector<ScaleDef> scaleList;
     int currentInstrumentIndex;
     

@@ -11,6 +11,7 @@
 #include "ofxOpenNI.h"
 #include "ofxUI.h"
 
+#include "InstrumentUI.h"
 #include "FluidSim.h"
 #include "FluidPlayer.h"
 #include "FluidKinect.h"

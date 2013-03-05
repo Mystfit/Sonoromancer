@@ -126,20 +126,28 @@ void FluidMotionApp::initGui(){
     optionsGui->addSpacer(length-xInit, 2);
     optionsGui->addWidgetDown(new ofxUIFPS(OFX_UI_FONT_MEDIUM));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "FULLSCREEN"));
+    
+    
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "SHOW INPUT"));
     optionsGui->addWidgetDown(new ofxUIToggle(32, 32, true, "USE MASKED INPUT"));
     optionsGui->addRangeSlider("CAM. DEPTH", 0.0f, 1.0f, 0.06f, 0.1f, length-xInit, dim);
     optionsGui->addMinimalSlider("BLOB THRESHOLD", 1, 150, 105, length-xInit, dim);
-
+    
     optionsGui->addSpacer(length-xInit, 2);
     optionsGui->addRadio("DISPLAY TEXTURE", texList, OFX_UI_ORIENTATION_VERTICAL, dim, dim);
     optionsGui->addSpacer(length-xInit, 2);
+    
+    optionsGui->addDropDownList("MIDI OUT", fluidPlayer.getMidiOut().getPortList(), length-xInit)->setAllowMultiple(false);
+    optionsGui->addDropDownList("MIDI IN", fluidPlayer.getMidiIn().getPortList(), length-xInit)->setAllowMultiple(false);
     
     optionsGui->addLabelButton("SAVE INSTRUMENTS", false);
     optionsGui->addLabelButton("LOAD INSTRUMENTS", false);
 
     ofAddListener(optionsGui->newGUIEvent, this, &FluidMotionApp::optionGuiEvent);
     optionsGui->loadSettings("GUI/guiSettings.xml");
+    
+//    InstrumentUI * test = new InstrumentUI(length-xInit + 10,0,length-xInit,ofGetHeight());
+//    test->initWidgets(fluidPlayer.getActiveInstrument());
     
     
     //Setup status gui
@@ -167,7 +175,33 @@ void FluidMotionApp::optionGuiEvent(ofxUIEventArgs &e)
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         ofSetFullscreen(toggle->getValue());
         
-    } else if(e.widget->getName() == "SHOW INPUT"){
+    }
+    
+    else if(e.widget->getName() == "MIDI OUT")
+    {
+        ofxUIDropDownList *dropDown = (ofxUIDropDownList *) e.widget;
+        
+        if(dropDown->getSelected().size() > 0){
+            dropDown->setLabelText("MIDI OUT: " + dropDown->getSelected()[0]->getName());
+            
+            fluidPlayer.setMidiDevice(dropDown->getSelected()[0]->getName(), FluidPlayer::MIDI_OUT);
+        }
+
+        
+    }
+    
+    else if(e.widget->getName() == "MIDI IN")
+    {
+        ofxUIDropDownList *dropDown = (ofxUIDropDownList *) e.widget;
+
+        if(dropDown->getSelected().size() > 0){
+            dropDown->setLabelText("MIDI IN: " + dropDown->getSelected()[0]->getName());
+            
+            fluidPlayer.setMidiDevice(dropDown->getSelected()[0]->getName(), FluidPlayer::MIDI_IN);
+        }    }
+    
+    
+    else if(e.widget->getName() == "SHOW INPUT"){
         bDrawKinect = ((ofxUIToggle *)e.widget)->getValue();
         
     } else if(e.widget->getName() == "USE MASKED INPUT"){
@@ -238,7 +272,7 @@ void FluidMotionApp::update(){
                 kinectSavedOpflowBlender.updateBlender( fluidKinect.opFlow.velTexX.getTextureReference(), fluidKinect.opFlow.velTexY.getTextureReference(), fluidKinect.getDepthTexture(), fluidKinect.getMaskTexture(), depthActivationStart, depthActivationEnd)->readToPixels(playbackPixels);
                 //texBlender.blendBuffer.dst->readToPixels(playbackPixels);
                 fluidInputTextures.push_back( playbackPixels );
-                fluidRecordedColour.push_back(fluidPlayer.getActiveInstrument().dyeColour);
+                fluidRecordedColour.push_back(fluidPlayer.getActiveInstrument()->dyeColour);
             }
             
             //Send camera velocities to fluid simulation
@@ -247,7 +281,7 @@ void FluidMotionApp::update(){
             //Set colours of dye based on user mask
             //fluid.setUserMasking( texBlender.blendUser.dst->getTextureReference());
             
-            fluid.setDyeColour(fluidPlayer.getActiveInstrument().dyeColour);
+            fluid.setDyeColour(fluidPlayer.getActiveInstrument()->dyeColour);
             fluid.update();    
         
             //Do blob detection on fluid simulation output
